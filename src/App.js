@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 class App extends Component {
   
   constructor(){
-    const date = new Date();
+    
     super();
     this.state={
       employeeList : [
@@ -15,7 +15,7 @@ class App extends Component {
           lastName :  "Hoti",
           email : "muhammad.hoti@gmail.com",
           salary : "50,000",
-          joinDate : date.getDate()+"/"+(+date.getMonth()+1)+"/"+date.getFullYear()
+          joinDate : "30/8/2018"
 
         },
         {
@@ -23,7 +23,7 @@ class App extends Component {
           lastName :  "Chohan",
           email : "zeece96@gmail.com",
           salary : "70,000",
-          joinDate : date.getDate()+"/"+(+date.getMonth()+1)+"/"+date.getFullYear()
+          joinDate : "30/8/2017"
 
         },
         {
@@ -31,7 +31,7 @@ class App extends Component {
           lastName :  "Chohan",
           email : "hrc10@gmail.com",
           salary : "90,000",
-          joinDate : date.getDate()+"/"+(+date.getMonth()+1)+"/"+date.getFullYear()
+          joinDate : '30/8/2015'
 
         }
       ],
