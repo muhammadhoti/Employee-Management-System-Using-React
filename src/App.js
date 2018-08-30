@@ -36,7 +36,13 @@ class App extends Component {
         }
       ],
       addEmployee : false,
+      editIndex : null,
     }
+    this.updateFirstName = this.updateFirstName.bind(this)
+    this.updateLastName = this.updateLastName.bind(this)
+    this.updateEmail = this.updateEmail.bind(this)
+    this.updateSalary = this.updateSalary.bind(this)
+    
   }
 
   //Event Functions
@@ -95,6 +101,67 @@ class App extends Component {
     
   }
 
+  deleteEmployee(index){
+   const empList = this.state.employeeList;
+    empList.splice(index, 1)
+   this.setState({
+     empList
+   })
+  }
+
+  editEmployee(index){
+    
+    this.setState(
+      {
+        editIndex : index
+      }
+    )
+  }
+
+  canceleditEmployee(){
+    this.setState({
+      editIndex : null
+    })
+  }
+
+  updateEmployee(){
+    const edI = this.state.editIndex
+    this.state.editedFirstName && (this.state.employeeList[edI].firstName = this.state.editedFirstName)
+    this.state.editedLastName && (this.state.employeeList[edI].lastName = this.state.editedLastName)
+    this.state.editedEmail && (this.state.employeeList[edI].email = this.state.editedEmail)
+    this.state.editedSalary && (this.state.employeeList[edI].salary = this.state.editedSalary)
+    this.setState({
+      // employeeList[edI].firstName : this.state.editedFirstName,
+      //I Tried This But It Throws An Error 
+      editIndex : null
+    })
+  }
+
+  updateFirstName(e){
+  this.setState({
+    editedFirstName : e.target.value
+  }
+  )
+  }
+
+  updateLastName(e){
+    this.setState({
+      editedLastName : e.target.value
+    })
+  }
+
+  updateEmail(e){
+    this.setState({
+      editedEmail : e.target.value
+    })
+    }
+    
+  updateSalary(e){
+    this.setState({
+      editedSalary : e.target.value
+    })
+      }
+
   //JSX Rendering Functions
 
   renderHeader(){
@@ -147,16 +214,34 @@ class App extends Component {
               <tbody>
               {this.state.employeeList.map((value, index)=>{
                     return(
-                          <tr>
+                      this.state.editIndex !== index ? <tr>
                             <th scope="row" id={index+1}>{index+1}</th>
                             <td className="centerAll" id={index+2}>{value.firstName}</td>
                             <td className="centerAll" id={index+3}>{value.lastName}</td>
                             <td className="centerAll" id={index+4}>{value.email}</td>
-                            <td className="centerAll" id={index+5}>{value.salary}</td>
+                            <td className="centerAll" id={index+5}>Rs.{value.salary}/=</td>
                             <td className="centerAll" id={index+6}>{value.joinDate}</td>
-                            <td className="centerAll" id={index+7}><button className="btn btn-primary">Edit</button></td>
-                            <td className="centerAll" id={index+8}><button className="btn btn-danger">Delete</button></td>
+                            <td className="centerAll" id={index+7}><button onClick={()=>{
+                              this.editEmployee(index)
+                            }} className="btn btn-primary">Edit</button></td>
+                            <td className="centerAll" id={index+8}><button onClick={()=>{
+                              this.deleteEmployee(index)
+                            }} className="btn btn-danger">Delete</button></td>
                           </tr>
+                          : <tr>
+                          <th scope="row" id={index+1}>{index+1}</th>
+                          <td className="centerAll" id={index+2+'edit'}><input type="text" defaultValue={value.firstName} onChange={this.updateFirstName}/></td>
+                          <td className="centerAll" id={index+3+'edit'}><input type="text" defaultValue={value.lastName} onChange={this.updateLastName}/></td>
+                          <td className="centerAll" id={index+4+'edit'}><input type="text" defaultValue={value.email} onChange={this.updateEmail} /></td>
+                          <td className="centerAll" id={index+5+'edit'}><input type="text" defaultValue={value.salary} onChange={this.updateSalary}/></td>
+                          <td className="centerAll" id={index+6+'edit'}><input type="text" defaultValue={value.joinDate}/></td>
+                          <td className="centerAll" id={index+7+'edit'}><button onClick={()=>{
+                            this.canceleditEmployee()
+                          }} className="btn btn-primary">Cancel</button></td>
+                          <td className="centerAll" id={index+8}><button onClick={()=>{
+                            this.updateEmployee(index)
+                          }} className="btn btn-info">Update</button></td>
+                        </tr>
                     )
                   })}
               </tbody>
