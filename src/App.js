@@ -247,9 +247,9 @@ class App extends Component {
               </tbody>
             </table>
           </div>
-          <button className="btn btn-success" onClick={()=>{
+          <a class="btn-floating btn-large waves-effect waves-light green" onClick={()=>{
             this.addEmployee()
-          }}>Add Employee</button>
+          }}><i class="material-icons">+</i></a>
         </div>
     )
     
@@ -276,9 +276,9 @@ class App extends Component {
           <label >Salary</label>
           <input type="text" className="form-control" id="salary" aria-describedby="emailHelp" placeholder="Enter Salary"/>
         </div>
-        <button type="button" className="btn btn-primary" onClick={()=>{
+        <a class="btn-floating btn-large waves-effect waves-light blue  " onClick={()=>{
         this.addEmployeeData()
-        }}>Add</button>
+        }}><i class="material-icons">+</i></a>
         </form>
         <button className="btn btn-danger addEmployeeForm" onClick={()=>{
         this.cancelAddEmployee()
@@ -306,6 +306,8 @@ class App extends Component {
       {this.state.user && !this.state.addEmployee && this.rendertoDoList()}
       {this.state.addEmployee && this.renderAddEmployee()}
       {this.state.user && !this.state.addEmployee && this.renderLogOut()}
+      
+
       </div>
     );
   }

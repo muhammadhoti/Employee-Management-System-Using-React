@@ -2,7 +2,9 @@
   "name": "emplyee_management_system_using_react",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://muhammadhoti.github.io/Employee-Management-System-Using-React",
   "dependencies": {
+    "gh-pages": "^1.2.0",
     "moment-timezone": "^0.5.21",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -11,6 +13,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
